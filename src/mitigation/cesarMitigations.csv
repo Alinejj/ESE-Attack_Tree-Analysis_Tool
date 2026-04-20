@@ -1,0 +1,16 @@
+scale,w_ac,w_td,w_dd
+INT,1,1,1
+node_name,AC_new,TD_new,DD_new
+(X36) Lost in destination mailroom,2,4,1
+(X82) Name deliberately misspelled on ballot,3,5,5
+(X33) Election process delay,3,4,3
+(X89) Gain exclusive access to ballot storage,4,5,2
+(X73) Form collaboration with mail worker and acquire access,5,3,2
+(X61) Debate and vote parties,5,1,2
+(X100) Unclear assistance instructions when you don't require one,3,5,3
+(X39) Register the to an accessible address,4,5,3
+(X9) Errant failed signature,1,5,4
+(X45) Intercept, mark, and return their ballot,4,4,5
+(X65) Failure to sign correctly,2,3,2
+(X79) Provide regional mail-in voting misinformation,5,4,3
+(X37) Mailbox attack,2,1,4

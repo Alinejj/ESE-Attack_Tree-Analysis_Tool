@@ -1,0 +1,149 @@
+index,node_type,outline_number,threat_description,AC,TD,DD,Occurrence_Score
+0,O,1,Insider attack,,,,
+1,O,1.1,Edit marked ballots,,,,
+2,O,1.1.1,Edit at local elections office,,,,
+3,A,1.1.1.1,Edit during duplication,,,,
+4,T,1.1.1.1.1,(X1) Form collaboration of poll workers,4.0,2.0,2.0,0.08
+5,T,1.1.1.1.2,(X2) Gain exclusive access to ballots,4.0,3.0,2.0,0.07
+6,T,1.1.1.1.3,(X3) Mark under/over votes or changes votes,3.0,4.0,2.0,0.07
+7,T,1.1.1.2,(X4) Edit during counting,5.0,3.0,3.0,0.06
+8,T,1.1.1.3,(X5) Edit during other handling,3.0,4.0,3.0,0.06
+9,O,1.1.2,Edit in transit,,,,
+10,A,1.1.2.1,Edit in post office,,,,
+11,T,1.1.2.1.1,(X73) Form collaboration with mail worker and acquire access,5.0,3.0,2.0,0.07
+12,T,1.1.2.1.2,(X74) Break into post office,5.0,4.0,4.0,0.05
+13,T,1.1.2.1.3,(X6) Edit in post office,3.0,4.0,3.0,0.06
+,O,1.1.3,Edit in transit at intermediate mailroom,,,,
+14,A,1.1.3.1,Gain exclusive access to intermediate mailroom,,,,
+15,T,1.1.3.1.1,(X75) Form collaboration with mail worker and acquire access,5.0,3.0,2.0,0.07
+16,T,1.1.3.1.2,(X76) Break into intermediate mailroom,5.0,4.0,3.0,0.05
+17,T,1.1.3.1.3,(X7) Edit in intermediate mailroom,3.0,2.0,2.0,0.09
+18,O,1.2,Discard marked ballot,,,,
+19,O,1.2.1,Challenge committed ballot,,,,
+20,O,1.2.1.1,Errant challenge,,,,
+21,T,1.2.1.1.1,(X8) Judge misinterprets rule,3.0,2.0,4.0,0.07
+22,T,1.2.1.1.2,(X9) Errant failed signature,1.0,2.0,4.0,0.12
+23,O,1.2.1.2,Malicious challenge,,,,
+24,T,1.2.1.2.1,(X10) Challenge signature,2.0,3.0,3.0,0.08
+25,T,1.2.1.2.2,(X11) Challenge postmark,2.0,3.0,3.0,0.08
+26,T,1.2.1.2.3,(X12) Challenge intent,2.0,3.0,2.0,0.09
+27,O,1.2.2,Marked ballot lost in the mail,,,,
+28,T,1.2.2.1,(X13) Malicious loss,4.0,2.0,2.0,0.08
+29,T,1.2.2.2,(X14) Accidental loss,2.0,2.0,2.0,0.1
+30,O,1.2.3,Discard marked ballots at local elections office,,,,
+31,A,1.2.3.1,Delete during duplication,,,,
+32,T,1.2.3.1.1,(X15) Form collaboration of poll workers,5.0,1.0,1.0,0.15
+33,T,1.2.3.1.2,(X16) Gain exclusive access to ballots,4.0,3.0,2.0,0.07
+34,T,1.2.3.1.3,(X17) Overcome controls,4.0,4.0,3.0,0.06
+35,T,1.2.3.2,(X18) Remove during counting,4.0,3.0,3.0,0.06
+36,T,1.2.3.3,(X19) Mark registration system to reflect duplicate,4.0,4.0,4.0,0.05
+37,T,1.2.3.4,(X20) Remove during other handling,3.0,3.0,3.0,0.07
+38,O,1.3,Miscount duplicated ballots,,,,
+39,A,1.3.1,Count original and duplicate,,,,
+40,T,1.3.1.1,(X21) File duplicate with duplicated ballot,4.0,3.0,3.0,0.06
+41,T,1.3.1.2,(X22) Defeat ballot accounting,4.0,4.0,4.0,0.05
+42,T,1.3.2,(X23) Omit original and duplicate,2.0,3.0,3.0,0.08
+43,O,1.4,Marked ballot stuffing,,,,
+44,T,1.4.1,(X24) Insert ballots during envelope separation,4.0,3.0,2.0,0.07
+45,T,1.4.2,(X25) Insert ballots during counting,4.0,3.0,4.0,0.06
+46,T,1.4.3,(X26) Insert ballots during recount,4.0,3.0,4.0,0.06
+47,T,1.4.4,(X27) Insert ballots during audit,4.0,3.0,2.0,0.07
+48,O,1.5,Manipulate or discard votable ballot,,,,
+49,O,1.5.1,Delete at local elections office,,,,
+50,T,1.5.1.1,(X28) Fail to stuff envelope,4.0,1.0,3.0,0.11
+51,T,1.5.1.2,(X29) Send wrong or pre marked ballot,4.0,4.0,3.0,0.06
+52,T,1.5.1.3,(X30) Mis-address envelope,3.0,4.0,3.0,0.06
+53,T,1.5.1.5,(X31) Destroy prepared envelope,4.0,2.0,2.0,0.08
+54,T,1.5.1.6,(X32) Destroy batch of prepared envelopes,4.0,4.0,2.0,0.07
+55,T,1.5.1.4,(X77) Manipulate return envelope,4.0,3.0,3.0,0.06
+56,O,1.5.2,Delay delivery past deadline,,,,
+57,T,1.5.2.1,(X33) Election process delay,3.0,2.0,3.0,0.08
+58,T,1.5.2.2,(X34) Handling delay,4.0,3.0,4.0,0.06
+59,T,1.5.2.3,(X35) Delay in the mail,4.0,3.0,2.0,0.07
+60,O,1.5.3,Delete at destination,,,,
+61,T,1.5.3.1,(X36) Lost in destination mailroom,2.0,2.0,1.0,0.13
+62,T,1.5.3.2,(X37) Mailbox attack,4.0,2.0,2.0,0.08
+63,O,1.6,Suppress voter turnout,,,,
+64,T,1.6.1,(X78) Misallocate polling or drop box locations,4.0,2.0,4.0,0.07
+65,T,1.6.2,(X79) Provide regional mail-in voting misinformation,4.0,4.0,3.0,0.06
+66,T,1.6.3,(X80) Hinder or suppress regional postal services,4.0,3.0,4.0,0.06
+67,T,1.6.4,(X81) System Outage,3.0,2.0,3.0,0.08
+68,T,1.6.5,(X82) Name deliberately misspelled on ballot,3.0,3.0,5.0,0.06
+69,O,1.7,Digital Attack,,,,
+70,T,1.7.1,(X83) Paper ballot scanner hacked,4.0,3.0,3.0,0.06
+71,T,1.7.2,(X84) Vote denied or altered,4.0,3.0,2.0,0.07
+72,O,2,Masquerade attack,,,,
+73,A,2.1,Deceased voters,,,,
+74,T,2.1.1,(X38) Identify target deceased voters,4.0,5.0,4.0,0.05
+75,T,2.1.2,(X39) Register the to an accessible address,4.0,4.0,3.0,0.06
+76,T,2.1.3,"(X40) Receive, mark, return their ballot",5.0,2.0,3.0,0.07
+77,T,2.1.4,(X41) Defeat signature check,4.0,2.0,1.0,0.12
+78,T,2.2,(X42) Family members,5.0,2.0,2.0,0.08
+79,A,2.3,Central housing,,,,
+80,T,2.3.1,(X43) Identify target residents,4.0,3.0,3.0,0.06
+81,T,2.3.2,(X44) Register them,4.0,2.0,3.0,0.07
+82,T,2.3.3,"(X45) Intercept, mark, and return their ballot",4.0,4.0,3.0,0.06
+83,O,2.3.4,Defeat Signature check,,,,
+84,T,2.3.4.1,(X46) Register as the voter,4.0,4.0,3.0,0.06
+85,T,2.3.4.2,(X47) Forge the signature,4.0,1.0,2.0,0.12
+86,A,2.4,Mailbox attack,,,,
+87,T,2.4.1,(X48) Identify target,4.0,2.0,4.0,0.07
+88,T,2.4.2,(X49) Steal blank ballot from mailbox,4.0,4.0,3.0,0.06
+89,T,2.4.3,"(X50) Receive, mark, return their ballots",5.0,2.0,2.0,0.08
+90,O,2.4.4,Defeat signature check,,,,
+91,T,2.4.4.1,(X51) Register as the voter,5.0,3.0,3.0,0.06
+92,T,2.4.4.2,(X52) Forge the signature,4.0,4.0,3.0,0.06
+93,T,2.5,(X53) Malicious "messenger ballots",4.0,4.0,1.0,0.1
+94,O,2.6,Drop box attack,,,,
+95,A,2.6.1,Steal/manipulate ballots in drop box,,,,
+96,T,2.6.1.1,(X85) Identify target,4.0,2.0,4.0,0.07
+97,T,2.6.1.2,(X86) Acquire access to drop box,4.0,4.0,2.0,0.07
+98,T,2.6.1.3,(X87) Alter marks and return their ballots,4.0,4.0,2.0,0.07
+99,T,2.6.2,(X88) Destroy drop box,5.0,4.0,4.0,0.05
+100,O,2.7,Ballot storage attack,,,,
+101,A,2.7.1,Manipulate ballots in storage,,,,
+102,T,2.7.1.1,(X89) Gain exclusive access to ballot storage,4.0,3.0,2.0,0.07
+103,T,2.7.1.2,(X90) Alter marks and return to storage,4.0,4.0,2.0,0.07
+104,A,2.7.2,Steal/destroy ballots in storage,,,,
+105,T,2.7.2.1,(X91) Gain exclusive access to ballot storage,4.0,3.0,2.0,0.07
+106,T,2.7.2.2,(X92) Steal/destroy ballots,4.0,4.0,3.0,0.06
+107,A,2.8,Caregivers,,,,
+108,T,2.8.1,(X93) Steal blank ballot from mailbox,4.0,4.0,3.0,0.06
+109,T,2.8.2,(X94) Mark and return their ballot,5.0,2.0,3.0,0.07
+110,T,2.8.3,(X95) Defeat signature check,4.0,2.0,1.0,0.12
+111,O,3,Voting process attacks,,,,
+112,O,3.1,Vote buying,,,,
+113,T,3.1.1,(X54) Bookie model,4.0,4.0,2.0,0.07
+114,A,3.1.2,Internet vote buying attack,,,,
+115,O,3.1.2.1,Attract voters,,,,
+116,T,3.1.2.1.1,(X55) Attract voters with internet adds,4.0,2.0,2.0,0.08
+117,T,3.1.2.1.2,(X56) Identify prospective vote sellers from voter rolls,4.0,3.0,2.0,0.07
+118,T,3.1.2.2,"(X57) Receive, mark, return their ballot",4.0,2.0,3.0,0.07
+119,T,3.1.2.3,(X58) Pay the voters via the internet,4.0,2.0,2.0,0.08
+120,T,3.1.3,(X59) Pay voters not to vote,4.0,2.0,2.0,0.08
+121,O,3.2,Organizer coercion attack,,,,
+122,T,3.2.1,(X60) Attribution threats,4.0,4.0,3.0,0.06
+123,T,3.2.2,(X61) Debate and vote parties,4.0,1.0,2.0,0.12
+124,T,3.3,(X62) Employer coercion attack,3.0,3.0,2.0,0.08
+125,T,3.4,(X63) Family member coercion attack,4.0,2.0,2.0,0.08
+126,T,3.5,(X64) Distribute false ballots,5.0,4.0,4.0,0.05
+127,A,3.6,Digital Attack,,,,
+128,T,3.6.1,(X96) Paper ballot scanner hacked,4.0,3.0,3.0,0.06
+129,T,3.6.2,(X97) Vote denied or altered,4.0,3.0,2.0,0.07
+130,T,3.7,(X98) Invalid identification card attack,4.0,2.0,5.0,0.06
+131,O,4,Errors in voting system processes,,,,
+132,O,4.1,Voter administrative error,,,,
+133,T,4.1.1,(X65) Failure to sign correctly,2.0,1.0,2.0,0.13
+134,T,4.1.2,(X66) Signature mismatch,4.0,2.0,3.0,0.07
+135,T,4.1.3,(X67) Failure to bundle correctly,2.0,1.0,5.0,0.11
+136,T,4.1.4,(X68) Failure to meet time requirements,4.0,3.0,4.0,0.06
+137,T,4.1.5,(X69) Confusion with federal write-in absentee ballot (overseas vote),3.0,2.0,2.0,0.09
+138,O,4.2,Voter selection error,,,,
+139,T,4.2.1,(X70) Human error mismark,3.0,2.0,4.0,0.07
+140,A,4.2.2,Ballot design flaw,,,,
+141,T,4.2.2.1,(X99) Error in instructions,4.0,3.0,3.0,0.06
+142,T,4.2.2.2,(X100) Unclear assistance instructions when you don't require one,3.0,3.0,3.0,0.07
+143,T,4.2.2.3,(X101) Ballot says ID required when you don't require one,2.0,2.0,3.0,0.09
+144,T,4.2.3,(X102) Expired voter ID,3.0,2.0,4.0,0.07
+145,T,4.2.4,(X71) Correction mistake,3.0,2.0,2.0,0.09
+146,T,4.2.5,(X72) Candidate name confusion,3.0,2.0,2.0,0.09

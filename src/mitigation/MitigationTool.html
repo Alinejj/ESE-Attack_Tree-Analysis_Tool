@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AT-AT Mitigation Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* HEADER */
+        .header {
+            background-color: #001529;
+            color: white;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 13px;
+            color: #a6adb4;
+            margin-top: 2px;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 960px;
+            margin: 32px auto;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* CARDS */
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #001529;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* INSTRUCTIONS */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .step-number {
+            background-color: #1890ff;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* CSV FORMAT */
+        .csv-format {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .format-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .format-table th {
+            background-color: #fafafa;
+            border: 1px solid #e8e8e8;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #001529;
+        }
+
+        .format-table td {
+            border: 1px solid #e8e8e8;
+            padding: 10px 12px;
+            color: #555;
+        }
+
+        .format-table tr:hover td {
+            background-color: #fafafa;
+        }
+
+        .csv-example {
+            background-color: #f6f8fa;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .csv-example p {
+            margin: 0;
+        }
+
+        /* UPLOAD SECTION */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .upload-box {
+            border: 2px dashed #d9d9d9;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            transition: border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .upload-box:hover {
+            border-color: #1890ff;
+        }
+
+        .upload-box.active {
+            border-color: #52c41a;
+            background-color: #f6ffed;
+        }
+
+        .upload-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .upload-box h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #001529;
+            margin-bottom: 6px;
+        }
+
+        .upload-box p {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
+        .upload-btn {
+            background-color: white;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            padding: 6px 16px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-btn:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            font-size: 12px;
+            color: #52c41a;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* RUN BUTTON */
+        .run-section {
+            text-align: center;
+        }
+
+        .run-btn {
+            background-color: #1890ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 48px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .run-btn:hover {
+            background-color: #096dd9;
+        }
+
+        .run-btn:disabled {
+            background-color: #d9d9d9;
+            cursor: not-allowed;
+        }
+
+        /* RESULTS */
+        .results-section {
+            display: none;
+        }
+
+        .summary-card {
+            background-color: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 8px;
+            padding: 16px 24px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #001529;
+        }
+
+        .summary-value.negative {
+            color: #52c41a;
+        }
+
+        .summary-value.positive {
+            color: #ff4d4f;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .results-table th {
+            background-color: #001529;
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .results-table td {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 12px 16px;
+            color: #333;
+        }
+
+        .results-table tr:hover td {
+            background-color: #fafafa;
+        }
+
+        .delta-negative {
+            color: #52c41a;
+            font-weight: 600;
+        }
+
+        .delta-positive {
+            color: #ff4d4f;
+            font-weight: 600;
+        }
+
+        /* ERROR */
+        .error-box {
+            background-color: #fff2f0;
+            border: 1px solid #ffccc7;
+            border-radius: 6px;
+            padding: 12px 16px;
+            color: #ff4d4f;
+            font-size: 13px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div>
+            <h1>AT-AT Mitigation Analysis Tool</h1>
+            <p>Apply countermeasures to attack trees and compute delta likelihood</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- INSTRUCTIONS -->
+        <div class="card">
+            <h2>How to Use This Tool</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p>Prepare your mitigation CSV file following the format described below. Make sure node names match exactly as they appear in your attack tree.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p>Export your attack tree as a JSON file from AT-AT using File -> Export CSV, or paste the tree JSON directly. The tree must include terminal node metrics (a, t, d values).</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p>Upload both files using the upload buttons below, then click Run Analysis to compute the mitigation impact.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <p>Review the results: the summary shows overall delta likelihood for the whole tree, and the table shows per-node baseline and mitigated probabilities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSV FORMAT -->
+        <div class="card">
+            <h2>CSV Format Instructions</h2>
+            <div class="csv-format">
+                <p style="font-size:13px; color:#555;">Your CSV file must follow this two-section format:</p>
+
+                <div class="csv-example">
+                    <p><strong>Section 1 — Metadata (Lines 1 and 2):</strong></p>
+                    <p># Line 1: column headers (can be named anything)</p>
+                    <p>scale,w_ac,w_td,w_dd</p>
+                    <p># Line 2: actual values</p>
+                    <p>INT,1,1,1</p>
+                    <br>
+                    <p><strong>Section 2 — Node Mitigations (Line 3 onward):</strong></p>
+                    <p># Line 3: column headers (can be named anything)</p>
+                    <p>node_name,AC_new,TD_new,DD_new</p>
+                    <p># Line 4 onward: actual mitigation data</p>
+                    <p>Form Collaboration of PWs,5,3,2</p>
+                    <p>Gain Exclusive Access to Ballots,5,4,2</p>
+                </div>
+
+                <table class="format-table">
+                    <tr>
+                        <th>Section</th>
+                        <th>Column Position</th>
+                        <th>Description</th>
+                        <th>Example Header Name</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Metadata</td>
+                        <td>scale</td>
+                        <td>Metric scale: either INT (1-5) or FLOAT (0-1)</td>
+                        <td>INT</td>
+                    </tr>
+                    <tr>
+                        <td>w_ac</td>
+                        <td>Weight for Attack Cost. Any positive number, auto-normalized</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>w_td</td>
+                        <td>Weight for Technical Difficulty. Any positive number, auto-normalized</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>w_dd</td>
+                        <td>Weight for Discovery Difficulty. Any positive number, auto-normalized</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Node Mitigations</td>
+                        <td>node_name</td>
+                        <td>Exact terminal node name as it appears in the attack tree</td>
+                        <td>Form Collaboration of PWs</td>
+                    </tr>
+                    <tr>
+                        <td>AC_new</td>
+                        <td>New Attack Cost value after mitigation is applied</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>TD_new</td>
+                        <td>New Technical Difficulty value after mitigation is applied</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>DD_new</td>
+                        <td>New Discovery Difficulty value after mitigation is applied</td>
+                        <td>2</td>
+                    </tr>
+                </table>
+
+                <div style="background:#fffbe6; border:1px solid #ffe58f; border-radius:6px; padding:12px 16px; font-size:13px; color:#555;">
+                    ⚠️ <strong>Important rules:</strong> 
+                    Column headers can be named anything but data must be in the correct order,
+                    Column 1: terminal node name, Column 2: new AC value, Column 3: new TD value, Column 4: new DD value. 
+                    Node names must match exactly as they appear in the attack tree. 
+                    All nodes must use the same scale. Weights must be positive numbers greater than 0. 
+                    AC and TD should only increase after mitigation. DD should only decrease after mitigation.
+                </div>
+            </div>
+        </div>
+
+        <!-- UPLOAD -->
+        <div class="card">
+            <h2>Upload Files</h2>
+            <div class="upload-grid">
+
+                <div class="upload-box" id="csvBox" onclick="document.getElementById('csvInput').click()">
+                    <div class="upload-icon">📄</div>
+                    <h3>Mitigation CSV File</h3>
+                    <p>Upload your formatted mitigation CSV file</p>
+                    <button class="upload-btn">Choose CSV File</button>
+                    <input type="file" id="csvInput" accept=".csv" onchange="handleCSVUpload(event)">
+                    <div class="file-name" id="csvFileName"></div>
+                </div>
+
+                <div class="upload-box" id="jsonBox" onclick="document.getElementById('jsonInput').click()">
+                    <div class="upload-icon">🌳</div>
+                    <h3>Attack Tree JSON File</h3>
+                    <p>Upload your attack tree exported as JSON</p>
+                    <button class="upload-btn">Choose JSON File</button>
+                    <input type="file" id="jsonInput" accept=".json" onchange="handleJSONUpload(event)">
+                    <div class="file-name" id="jsonFileName"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RUN BUTTON -->
+        <div class="run-section">
+            <div class="error-box" id="errorBox"></div>
+            <br>
+            <button class="run-btn" id="runBtn" onclick="runAnalysis()" disabled>
+                Run Mitigation Analysis
+            </button>
+            <button onclick="clearAll()" style="background:white; border:1px solid #d9d9d9; border-radius:6px; padding:12px 48px; font-size:15px; font-weight:600; cursor:pointer; margin-left:16px; color:#555;">
+                Clear
+            </button>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="card results-section" id="resultsSection">
+            <h2>Results</h2>
+
+            <div class="summary-card">
+                <div class="summary-item">
+                    <span class="summary-label">Scale</span>
+                    <span class="summary-value" id="summaryScale">—</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Baseline Likelihood</span>
+                    <span class="summary-value" id="summaryBaseline">—</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Mitigated Likelihood</span>
+                    <span class="summary-value" id="summaryMitigated">—</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Delta Likelihood</span>
+                    <span class="summary-value" id="summaryDelta">—</span>
+                </div>
+            </div>
+
+            <div id="warningsBox" style="display:none; background:#fffbe6; border:1px solid #ffe58f; border-radius:6px; padding:12px 16px; font-size:13px; color:#555; margin-bottom:16px;">
+                <strong>⚠️ Warnings:</strong>
+                <ul id="warningsList" style="margin-top:8px; padding-left:20px;"></ul>
+            </div>
+
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Node Name</th>
+                        <th>Baseline p(H|A)</th>
+                        <th>Mitigated p(H|A)</th>
+                        <th>Delta</th>
+                        <th>% Change</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+
+        class MitigationController{
+            sigmoid(x) {
+                return 1 / (1 + Math.exp(-x));
+            }
+
+            computeOrProbability(children){
+                return 1 - children.reduce((product, p) => product * (1 - p), 1);
+            }
+
+            computeANDProbability(children){
+                return children.reduce((product, p) => product * p, 1);
+            }
+
+            normalizeWeights(w_ac, w_td, w_dd){
+                if(w_ac <= 0 || w_td <= 0 || w_dd <= 0){
+                    throw new Error("All weights must be positive numbers greater than 0");
+                }
+                let total = w_ac + w_td + w_dd;
+                return { w_ac: w_ac/total, w_td: w_td/total, w_dd: w_dd/total };
+            }
+
+            computePHA(AC, TD, DD, w_ac = 0.6, w_td = 0.6, w_dd = 0.8, scale = "FLOAT"){
+                let score;
+                if(scale === "INT"){
+                    score = (w_ac * 0.2 / AC) + (w_td * 0.2 / TD) + (w_dd * 0.2 / DD);
+                    return score;
+                } else {
+                    score = w_dd * DD - w_ac * AC - w_td * TD;
+                    return this.sigmoid(score);
+                }
+            }
+
+            validateMitigationDirection(node, mitigation){
+                let AC = parseFloat(node.a);
+                let TD = parseFloat(node.t);
+                let DD = parseFloat(node.d);
+                let warnings = [];
+                if(mitigation.AC_new < AC) warnings.push(`Warning: AC decreased for node "${node.name}", AC should only increase`);
+                if(mitigation.TD_new < TD) warnings.push(`Warning: TD decreased for node "${node.name}", TD should only increase`);
+                if(mitigation.DD_new > DD) warnings.push(`Warning: DD increased for node "${node.name}", DD should only decrease`);
+                return warnings;
+            }
+
+            applyMitigation(node, mitigation, scale = "FLOAT", w_ac = 1, w_td = 1, w_dd = 1){
+                let weights = this.normalizeWeights(w_ac, w_td, w_dd);
+                let AC = parseFloat(node.a);
+                let TD = parseFloat(node.t);
+                let DD = parseFloat(node.d);
+                if(isNaN(AC) || isNaN(TD) || isNaN(DD)){
+                    throw new Error(`Node "${node.name}" is missing a, t, or d values`);
+                }
+                let warnings = this.validateMitigationDirection(node, mitigation);
+                if(warnings.length > 0) warnings.forEach(w => console.warn(w));
+                let baseline = this.computePHA(AC, TD, DD, weights.w_ac, weights.w_td, weights.w_dd, scale);
+                let mitigated = this.computePHA(mitigation.AC_new, mitigation.TD_new, mitigation.DD_new, weights.w_ac, weights.w_td, weights.w_dd, scale);
+                return { baseline, mitigated, delta: mitigated - baseline };
+            }
+
+            parseMitigationCSV(csvText){
+                let lines = csvText.replace(/\r/g, "").split("\n");
+                let metaValues = lines[1].split(",");
+                let scale = metaValues[0].trim();
+                let w_ac = parseFloat(metaValues[1]);
+                let w_td = parseFloat(metaValues[2]);
+                let w_dd = parseFloat(metaValues[3]);
+                let dataLines = lines.slice(3);
+                let mitigations = [];
+                dataLines.forEach(line => {
+                    if(line.trim() === "") return;
+                    let parts = line.split(",");
+                    mitigations.push({
+                        node_name: parts[0].trim(),
+                        AC_new: parseFloat(parts[1]),
+                        TD_new: parseFloat(parts[2]),
+                        DD_new: parseFloat(parts[3])
+                    });
+                });
+                return { scale, weights: {w_ac, w_td, w_dd}, mitigations };
+            }
+
+            analyzeMitigations(tree, mitigations, scale = "FLOAT", w_ac = 1, w_td = 1, w_dd = 1, warnings = []){
+                let weights = this.normalizeWeights(w_ac, w_td, w_dd);
+                let results = [];
+                const walkTree = (node) => {
+                    if(!node.children || node.children.length === 0){
+                        let mitigation = mitigations.find(m =>
+                            m.node_name.trim().toLowerCase() === node.name.trim().toLowerCase()
+                        );
+                        if(mitigation){
+                            let nodeWarnings = this.validateMitigationDirection(node, mitigation);
+                            nodeWarnings.forEach(w => warnings.push(w));
+                            let result = this.applyMitigation(node, mitigation, scale, weights.w_ac, weights.w_td, weights.w_dd);
+                            result.node_name = node.name;
+                            results.push(result);
+                        }
+                    } else {
+                        node.children.forEach(child => walkTree(child));
+                    }
+                };
+                walkTree(tree);
+                return results;
+            }
+
+            computeTreeProbability(node, scale = "FLOAT", w_ac = 1, w_td = 1, w_dd = 1){
+                let weights = this.normalizeWeights(w_ac, w_td, w_dd);
+                if(!node.children || node.children.length === 0){
+                    let AC = parseFloat(node.a);
+                    let TD = parseFloat(node.t);
+                    let DD = parseFloat(node.d);
+                    if(isNaN(AC) || isNaN(TD) || isNaN(DD)){
+                        console.warn(`Warning: Node "${node.name}" is missing a, t, or d values — skipping`);
+                        return 0;
+                    }
+                    return this.computePHA(AC, TD, DD, weights.w_ac, weights.w_td, weights.w_dd, scale);
+                }
+                let childProbs = node.children.map(child =>
+                    this.computeTreeProbability(child, scale, w_ac, w_td, w_dd)
+                );
+                if(node.operator === "OR") return this.computeOrProbability(childProbs);
+                else return this.computeANDProbability(childProbs);
+            }
+
+            computeDeltaLikelihood(tree, mitigations, scale = "FLOAT", w_ac = 1, w_td = 1, w_dd = 1){
+                let weights = this.normalizeWeights(w_ac, w_td, w_dd);
+                let baselineProbability = this.computeTreeProbability(tree, scale, weights.w_ac, weights.w_td, weights.w_dd);
+                let mitigatedTree = JSON.parse(JSON.stringify(tree));
+                const applyToTree = (node) => {
+                    if(!node.children || node.children.length === 0){
+                        let mitigation = mitigations.find(m =>
+                            m.node_name.trim().toLowerCase() === node.name.trim().toLowerCase()
+                        );
+                        if(mitigation){
+                            node.a = mitigation.AC_new.toString();
+                            node.t = mitigation.TD_new.toString();
+                            node.d = mitigation.DD_new.toString();
+                        }
+                    } else {
+                        node.children.forEach(child => applyToTree(child));
+                    }
+                };
+                applyToTree(mitigatedTree);
+                let mitigatedProbability = this.computeTreeProbability(mitigatedTree, scale, weights.w_ac, weights.w_td, weights.w_dd);
+                return { baseline: baselineProbability, mitigated: mitigatedProbability, delta: mitigatedProbability - baselineProbability };
+            }
+            runMitigationAnalysis(tree, csvText){
+                let csvResult = this.parseMitigationCSV(csvText);
+                let weights = this.normalizeWeights(csvResult.weights.w_ac, csvResult.weights.w_td, csvResult.weights.w_dd);
+                let allWarnings = [];
+                let nodeResults = this.analyzeMitigations(tree, csvResult.mitigations, csvResult.scale, weights.w_ac, weights.w_td, weights.w_dd, allWarnings);
+                let deltaLikelihood = this.computeDeltaLikelihood(tree, csvResult.mitigations, csvResult.scale, weights.w_ac, weights.w_td, weights.w_dd);
+                return { scale: csvResult.scale, weights, nodeResults, deltaLikelihood, warnings: allWarnings };
+            }
+        }
+        const mc = new MitigationController();
+        let csvText = null;
+        let treeJSON = null;
+        function handleCSVUpload(event){
+            const file = event.target.files[0];
+            if(!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e){
+                csvText = e.target.result;
+                document.getElementById("csvFileName").textContent = "✓ " + file.name;
+                document.getElementById("csvBox").classList.add("active");
+                checkEnableRunButton();
+            };
+            reader.readAsText(file);
+        }
+        function handleJSONUpload(event){
+            const file = event.target.files[0];
+            if(!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e){
+                try {
+                    treeJSON = JSON.parse(e.target.result);
+                    document.getElementById("jsonFileName").textContent = "✓ " + file.name;
+                    document.getElementById("jsonBox").classList.add("active");
+                    checkEnableRunButton();
+                } catch(err) {
+                    showError("Invalid JSON file, please upload a valid attack tree JSON");
+                }
+            };
+            reader.readAsText(file);
+        }
+        function checkEnableRunButton(){
+            const runBtn = document.getElementById("runBtn");
+            if(csvText && treeJSON){
+                runBtn.disabled = false;
+            }
+        }
+        function showError(message){
+            const errorBox = document.getElementById("errorBox");
+            errorBox.textContent = message;
+            errorBox.style.display = "block";
+        }
+
+        function hideError(){
+            document.getElementById("errorBox").style.display = "none";
+        }
+
+        function runAnalysis(){
+            hideError();
+            try {
+                const result = mc.runMitigationAnalysis(treeJSON, csvText);
+                displayResults(result);
+            } catch(err) {
+                showError("Error running analysis: " + err.message);
+            }
+        }
+        function displayResults(result){
+            if(result.nodeResults.length === 0){
+                showError("No mitigations matched any nodes in the tree. Check that node names in your CSV match exactly with the attack tree.");
+                return;
+            }
+            // show results section
+            document.getElementById("resultsSection").style.display = "block";
+
+            // fill summary card
+            document.getElementById("summaryScale").textContent = result.scale;
+            document.getElementById("summaryBaseline").textContent = result.deltaLikelihood.baseline.toFixed(8);
+            document.getElementById("summaryMitigated").textContent = result.deltaLikelihood.mitigated.toFixed(8);
+
+            const delta = result.deltaLikelihood.delta;
+            const deltaEl = document.getElementById("summaryDelta");
+            deltaEl.textContent = delta.toFixed(8);
+            deltaEl.className = "summary-value " + (delta < 0 ? "negative" : "positive");
+
+            const warningsBox = document.getElementById("warningsBox");
+            const warningsList = document.getElementById("warningsList");
+            warningsList.innerHTML = "";
+            if(result.warnings && result.warnings.length > 0){
+                result.warnings.forEach(w => {
+                    const li = document.createElement("li");
+                    li.textContent = w;
+                    warningsList.appendChild(li);
+                });
+                warningsBox.style.display = "block";
+            } else {
+                warningsBox.style.display = "none";
+            }
+
+            // fill results table
+            const tbody = document.getElementById("resultsBody");
+            tbody.innerHTML = "";
+
+            result.nodeResults.forEach(node => {
+                const pctChange = ((node.delta / node.baseline) * 100).toFixed(2);
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${node.node_name}</td>
+                    <td>${node.baseline.toFixed(6)}</td>
+                    <td>${node.mitigated.toFixed(6)}</td>
+                    <td class="${node.delta < 0 ? 'delta-negative' : 'delta-positive'}">${node.delta.toFixed(6)}</td>
+                    <td class="${node.delta < 0 ? 'delta-negative' : 'delta-positive'}">${pctChange}%</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // scroll to results
+            document.getElementById("resultsSection").scrollIntoView({ behavior: "smooth" });
+        }
+
+        function clearAll(){
+            csvText = null;
+            treeJSON = null;
+            document.getElementById("csvFileName").textContent = "";
+            document.getElementById("jsonFileName").textContent = "";
+            document.getElementById("csvBox").classList.remove("active");
+            document.getElementById("jsonBox").classList.remove("active");
+            document.getElementById("csvInput").value = "";
+            document.getElementById("jsonInput").value = "";
+            document.getElementById("runBtn").disabled = true;
+            document.getElementById("resultsSection").style.display = "none";
+            document.getElementById("warningsBox").style.display = "none";
+            hideError();
+        }
+
+
+
+    </script>
+
+</body>
+</html>

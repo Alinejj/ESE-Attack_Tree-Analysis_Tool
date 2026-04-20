@@ -1,0 +1,894 @@
+{
+  "name": "Election Attack Tree",
+  "operator": "OR",
+  "children": [
+    {
+      "name": "Insider attack",
+      "operator": "OR",
+      "children": [
+        {
+          "name": "Edit marked ballots",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "Edit at local elections office",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "Edit during duplication",
+                  "operator": "AND",
+                  "children": [
+                    {
+                      "name": "(X1) Form collaboration of poll workers",
+                      "a": "4.0",
+                      "t": "2.0",
+                      "d": "2.0"
+                    },
+                    {
+                      "name": "(X2) Gain exclusive access to ballots",
+                      "a": "4.0",
+                      "t": "3.0",
+                      "d": "2.0"
+                    },
+                    {
+                      "name": "(X3) Mark under/over votes or changes votes",
+                      "a": "3.0",
+                      "t": "4.0",
+                      "d": "2.0"
+                    }
+                  ]
+                },
+                {
+                  "name": "(X4) Edit during counting",
+                  "a": "5.0",
+                  "t": "3.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X5) Edit during other handling",
+                  "a": "3.0",
+                  "t": "4.0",
+                  "d": "3.0"
+                }
+              ]
+            },
+            {
+              "name": "Edit in transit",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "Edit in post office",
+                  "operator": "AND",
+                  "children": [
+                    {
+                      "name": "(X73) Form collaboration with mail worker and acquire access",
+                      "a": "5.0",
+                      "t": "3.0",
+                      "d": "2.0"
+                    },
+                    {
+                      "name": "(X74) Break into post office",
+                      "a": "5.0",
+                      "t": "4.0",
+                      "d": "4.0"
+                    },
+                    {
+                      "name": "(X6) Edit in post office",
+                      "a": "3.0",
+                      "t": "4.0",
+                      "d": "3.0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Edit in transit at intermediate mailroom",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "Gain exclusive access to intermediate mailroom",
+                  "operator": "AND",
+                  "children": [
+                    {
+                      "name": "(X75) Form collaboration with mail worker and acquire access",
+                      "a": "5.0",
+                      "t": "3.0",
+                      "d": "2.0"
+                    },
+                    {
+                      "name": "(X76) Break into intermediate mailroom",
+                      "a": "5.0",
+                      "t": "4.0",
+                      "d": "3.0"
+                    },
+                    {
+                      "name": "(X7) Edit in intermediate mailroom",
+                      "a": "3.0",
+                      "t": "2.0",
+                      "d": "2.0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Discard marked ballot",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "Challenge committed ballot",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "Errant challenge",
+                  "operator": "OR",
+                  "children": [
+                    {
+                      "name": "(X8) Judge misinterprets rule",
+                      "a": "3.0",
+                      "t": "2.0",
+                      "d": "4.0"
+                    },
+                    {
+                      "name": "(X9) Errant failed signature",
+                      "a": "1.0",
+                      "t": "2.0",
+                      "d": "4.0"
+                    }
+                  ]
+                },
+                {
+                  "name": "Malicious challenge",
+                  "operator": "OR",
+                  "children": [
+                    {
+                      "name": "(X10) Challenge signature",
+                      "a": "2.0",
+                      "t": "3.0",
+                      "d": "3.0"
+                    },
+                    {
+                      "name": "(X11) Challenge postmark",
+                      "a": "2.0",
+                      "t": "3.0",
+                      "d": "3.0"
+                    },
+                    {
+                      "name": "(X12) Challenge intent",
+                      "a": "2.0",
+                      "t": "3.0",
+                      "d": "2.0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Marked ballot lost in the mail",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "(X13) Malicious loss",
+                  "a": "4.0",
+                  "t": "2.0",
+                  "d": "2.0"
+                },
+                {
+                  "name": "(X14) Accidental loss",
+                  "a": "2.0",
+                  "t": "2.0",
+                  "d": "2.0"
+                }
+              ]
+            },
+            {
+              "name": "Discard marked ballots at local elections office",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "Delete during duplication",
+                  "operator": "AND",
+                  "children": [
+                    {
+                      "name": "(X15) Form collaboration of poll workers",
+                      "a": "5.0",
+                      "t": "1.0",
+                      "d": "1.0"
+                    },
+                    {
+                      "name": "(X16) Gain exclusive access to ballots",
+                      "a": "4.0",
+                      "t": "3.0",
+                      "d": "2.0"
+                    },
+                    {
+                      "name": "(X17) Overcome controls",
+                      "a": "4.0",
+                      "t": "4.0",
+                      "d": "3.0"
+                    }
+                  ]
+                },
+                {
+                  "name": "(X18) Remove during counting",
+                  "a": "4.0",
+                  "t": "3.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X19) Mark registration system to reflect duplicate",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "4.0"
+                },
+                {
+                  "name": "(X20) Remove during other handling",
+                  "a": "3.0",
+                  "t": "3.0",
+                  "d": "3.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Miscount duplicated ballots",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "Count original and duplicate",
+              "operator": "AND",
+              "children": [
+                {
+                  "name": "(X21) File duplicate with duplicated ballot",
+                  "a": "4.0",
+                  "t": "3.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X22) Defeat ballot accounting",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "4.0"
+                }
+              ]
+            },
+            {
+              "name": "(X23) Omit original and duplicate",
+              "a": "2.0",
+              "t": "3.0",
+              "d": "3.0"
+            }
+          ]
+        },
+        {
+          "name": "Marked ballot stuffing",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "(X24) Insert ballots during envelope separation",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "2.0"
+            },
+            {
+              "name": "(X25) Insert ballots during counting",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "4.0"
+            },
+            {
+              "name": "(X26) Insert ballots during recount",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "4.0"
+            },
+            {
+              "name": "(X27) Insert ballots during audit",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "2.0"
+            }
+          ]
+        },
+        {
+          "name": "Manipulate or discard votable ballot",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "Delete at local elections office",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "(X28) Fail to stuff envelope",
+                  "a": "4.0",
+                  "t": "1.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X29) Send wrong or pre marked ballot",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X30) Mis-address envelope",
+                  "a": "3.0",
+                  "t": "4.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X31) Destroy prepared envelope",
+                  "a": "4.0",
+                  "t": "2.0",
+                  "d": "2.0"
+                },
+                {
+                  "name": "(X32) Destroy batch of prepared envelopes",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "2.0"
+                },
+                {
+                  "name": "(X77) Manipulate return envelope",
+                  "a": "4.0",
+                  "t": "3.0",
+                  "d": "3.0"
+                }
+              ]
+            },
+            {
+              "name": "Delay delivery past deadline",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "(X33) Election process delay",
+                  "a": "3.0",
+                  "t": "2.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X34) Handling delay",
+                  "a": "4.0",
+                  "t": "3.0",
+                  "d": "4.0"
+                },
+                {
+                  "name": "(X35) Delay in the mail",
+                  "a": "4.0",
+                  "t": "3.0",
+                  "d": "2.0"
+                }
+              ]
+            },
+            {
+              "name": "Delete at destination",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "(X36) Lost in destination mailroom",
+                  "a": "2.0",
+                  "t": "2.0",
+                  "d": "1.0"
+                },
+                {
+                  "name": "(X37) Mailbox attack",
+                  "a": "4.0",
+                  "t": "2.0",
+                  "d": "2.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Suppress voter turnout",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "(X78) Misallocate polling or drop box locations",
+              "a": "4.0",
+              "t": "2.0",
+              "d": "4.0"
+            },
+            {
+              "name": "(X79) Provide regional mail-in voting misinformation",
+              "a": "4.0",
+              "t": "4.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X80) Hinder or suppress regional postal services",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "4.0"
+            },
+            {
+              "name": "(X81) System Outage",
+              "a": "3.0",
+              "t": "2.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X82) Name deliberately misspelled on ballot",
+              "a": "3.0",
+              "t": "3.0",
+              "d": "5.0"
+            }
+          ]
+        },
+        {
+          "name": "Digital Attack",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "(X83) Paper ballot scanner hacked",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X84) Vote denied or altered",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "2.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Masquerade attack",
+      "operator": "OR",
+      "children": [
+        {
+          "name": "Deceased voters",
+          "operator": "AND",
+          "children": [
+            {
+              "name": "(X38) Identify target deceased voters",
+              "a": "4.0",
+              "t": "5.0",
+              "d": "4.0"
+            },
+            {
+              "name": "(X39) Register the to an accessible address",
+              "a": "4.0",
+              "t": "4.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X40) Receive, mark, return their ballot",
+              "a": "5.0",
+              "t": "2.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X41) Defeat signature check",
+              "a": "4.0",
+              "t": "2.0",
+              "d": "1.0"
+            }
+          ]
+        },
+        {
+          "name": "(X42) Family members",
+          "a": "5.0",
+          "t": "2.0",
+          "d": "2.0"
+        },
+        {
+          "name": "Central housing",
+          "operator": "AND",
+          "children": [
+            {
+              "name": "(X43) Identify target residents",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X44) Register them",
+              "a": "4.0",
+              "t": "2.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X45) Intercept, mark, and return their ballot",
+              "a": "4.0",
+              "t": "4.0",
+              "d": "3.0"
+            },
+            {
+              "name": "Defeat Signature check",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "(X46) Register as the voter",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X47) Forge the signature",
+                  "a": "4.0",
+                  "t": "1.0",
+                  "d": "2.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mailbox attack",
+          "operator": "AND",
+          "children": [
+            {
+              "name": "(X48) Identify target",
+              "a": "4.0",
+              "t": "2.0",
+              "d": "4.0"
+            },
+            {
+              "name": "(X49) Steal blank ballot from mailbox",
+              "a": "4.0",
+              "t": "4.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X50) Receive, mark, return their ballots",
+              "a": "5.0",
+              "t": "2.0",
+              "d": "2.0"
+            },
+            {
+              "name": "Defeat signature check",
+              "operator": "OR",
+              "children": [
+                {
+                  "name": "(X51) Register as the voter",
+                  "a": "5.0",
+                  "t": "3.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X52) Forge the signature",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "3.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "(X53) Malicious messenger ballots",
+          "a": "4.0",
+          "t": "4.0",
+          "d": "1.0"
+        },
+        {
+          "name": "Drop box attack",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "Steal/manipulate ballots in drop box",
+              "operator": "AND",
+              "children": [
+                {
+                  "name": "(X85) Identify target",
+                  "a": "4.0",
+                  "t": "2.0",
+                  "d": "4.0"
+                },
+                {
+                  "name": "(X86) Acquire access to drop box",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "2.0"
+                },
+                {
+                  "name": "(X87) Alter marks and return their ballots",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "2.0"
+                }
+              ]
+            },
+            {
+              "name": "(X88) Destroy drop box",
+              "a": "5.0",
+              "t": "4.0",
+              "d": "4.0"
+            }
+          ]
+        },
+        {
+          "name": "Ballot storage attack",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "Manipulate ballots in storage",
+              "operator": "AND",
+              "children": [
+                {
+                  "name": "(X89) Gain exclusive access to ballot storage",
+                  "a": "4.0",
+                  "t": "3.0",
+                  "d": "2.0"
+                },
+                {
+                  "name": "(X90) Alter marks and return to storage",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "2.0"
+                }
+              ]
+            },
+            {
+              "name": "Steal/destroy ballots in storage",
+              "operator": "AND",
+              "children": [
+                {
+                  "name": "(X91) Gain exclusive access to ballot storage",
+                  "a": "4.0",
+                  "t": "3.0",
+                  "d": "2.0"
+                },
+                {
+                  "name": "(X92) Steal/destroy ballots",
+                  "a": "4.0",
+                  "t": "4.0",
+                  "d": "3.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Caregivers",
+          "operator": "AND",
+          "children": [
+            {
+              "name": "(X93) Steal blank ballot from mailbox",
+              "a": "4.0",
+              "t": "4.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X94) Mark and return their ballot",
+              "a": "5.0",
+              "t": "2.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X95) Defeat signature check",
+              "a": "4.0",
+              "t": "2.0",
+              "d": "1.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Voting process attacks",
+      "operator": "OR",
+      "children": [
+        {
+          "name": "Vote buying",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "(X54) Bookie model",
+              "a": "4.0",
+              "t": "4.0",
+              "d": "2.0"
+            },
+            {
+              "name": "Internet vote buying attack",
+              "operator": "AND",
+              "children": [
+                {
+                  "name": "Attract voters",
+                  "operator": "OR",
+                  "children": [
+                    {
+                      "name": "(X55) Attract voters with internet adds",
+                      "a": "4.0",
+                      "t": "2.0",
+                      "d": "2.0"
+                    },
+                    {
+                      "name": "(X56) Identify prospective vote sellers from voter rolls",
+                      "a": "4.0",
+                      "t": "3.0",
+                      "d": "2.0"
+                    }
+                  ]
+                },
+                {
+                  "name": "(X57) Receive, mark, return their ballot",
+                  "a": "4.0",
+                  "t": "2.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X58) Pay the voters via the internet",
+                  "a": "4.0",
+                  "t": "2.0",
+                  "d": "2.0"
+                }
+              ]
+            },
+            {
+              "name": "(X59) Pay voters not to vote",
+              "a": "4.0",
+              "t": "2.0",
+              "d": "2.0"
+            }
+          ]
+        },
+        {
+          "name": "Organizer coercion attack",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "(X60) Attribution threats",
+              "a": "4.0",
+              "t": "4.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X61) Debate and vote parties",
+              "a": "4.0",
+              "t": "1.0",
+              "d": "2.0"
+            }
+          ]
+        },
+        {
+          "name": "(X62) Employer coercion attack",
+          "a": "3.0",
+          "t": "3.0",
+          "d": "2.0"
+        },
+        {
+          "name": "(X63) Family member coercion attack",
+          "a": "4.0",
+          "t": "2.0",
+          "d": "2.0"
+        },
+        {
+          "name": "(X64) Distribute false ballots",
+          "a": "5.0",
+          "t": "4.0",
+          "d": "4.0"
+        },
+        {
+          "name": "Digital Attack",
+          "operator": "AND",
+          "children": [
+            {
+              "name": "(X96) Paper ballot scanner hacked",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X97) Vote denied or altered",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "2.0"
+            }
+          ]
+        },
+        {
+          "name": "(X98) Invalid identification card attack",
+          "a": "4.0",
+          "t": "2.0",
+          "d": "5.0"
+        }
+      ]
+    },
+    {
+      "name": "Errors in voting system processes",
+      "operator": "OR",
+      "children": [
+        {
+          "name": "Voter administrative error",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "(X65) Failure to sign correctly",
+              "a": "2.0",
+              "t": "1.0",
+              "d": "2.0"
+            },
+            {
+              "name": "(X66) Signature mismatch",
+              "a": "4.0",
+              "t": "2.0",
+              "d": "3.0"
+            },
+            {
+              "name": "(X67) Failure to bundle correctly",
+              "a": "2.0",
+              "t": "1.0",
+              "d": "5.0"
+            },
+            {
+              "name": "(X68) Failure to meet time requirements",
+              "a": "4.0",
+              "t": "3.0",
+              "d": "4.0"
+            },
+            {
+              "name": "(X69) Confusion with federal write-in absentee ballot (overseas vote)",
+              "a": "3.0",
+              "t": "2.0",
+              "d": "2.0"
+            }
+          ]
+        },
+        {
+          "name": "Voter selection error",
+          "operator": "OR",
+          "children": [
+            {
+              "name": "(X70) Human error mismark",
+              "a": "3.0",
+              "t": "2.0",
+              "d": "4.0"
+            },
+            {
+              "name": "Ballot design flaw",
+              "operator": "AND",
+              "children": [
+                {
+                  "name": "(X99) Error in instructions",
+                  "a": "4.0",
+                  "t": "3.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X100) Unclear assistance instructions when you don't require one",
+                  "a": "3.0",
+                  "t": "3.0",
+                  "d": "3.0"
+                },
+                {
+                  "name": "(X101) Ballot says ID required when you don't require one",
+                  "a": "2.0",
+                  "t": "2.0",
+                  "d": "3.0"
+                }
+              ]
+            },
+            {
+              "name": "(X102) Expired voter ID",
+              "a": "3.0",
+              "t": "2.0",
+              "d": "4.0"
+            },
+            {
+              "name": "(X71) Correction mistake",
+              "a": "3.0",
+              "t": "2.0",
+              "d": "2.0"
+            },
+            {
+              "name": "(X72) Candidate name confusion",
+              "a": "3.0",
+              "t": "2.0",
+              "d": "2.0"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
