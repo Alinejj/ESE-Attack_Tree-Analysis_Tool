@@ -162,3 +162,33 @@ let missingNode = {name: "Missing Values Node", operator: "OR", children: [
 ]};
 console.log("Fix 4 - missing values warning test:");
 mc.computeTreeProbability(missingNode, "INT");
+
+// test computeBranchResults
+let branchResults = mc.runMitigationAnalysis(realTreeSlice, fullCSV);
+console.log("Branch results:", JSON.stringify(branchResults.branchResults, null, 2));
+
+// test computeBranchResults with a tree that has branches
+let branchTree = {
+    name: "Root",
+    operator: "OR",
+    children: [
+        {
+            name: "Branch 1",
+            operator: "OR",
+            children: [
+                {name: "Form Collaboration of PWs", a: "4", t: "2", d: "2"},
+                {name: "Gain Exclusive Access to Ballots", a: "4", t: "3", d: "2"}
+            ]
+        },
+        {
+            name: "Branch 2",
+            operator: "OR",
+            children: [
+                {name: "Mark under/over votes or changes votes", a: "3", t: "4", d: "2"}
+            ]
+        }
+    ]
+};
+
+let branchFullResult = mc.runMitigationAnalysis(branchTree, fullCSV);
+console.log("Branch results:", JSON.stringify(branchFullResult.branchResults, null, 2));

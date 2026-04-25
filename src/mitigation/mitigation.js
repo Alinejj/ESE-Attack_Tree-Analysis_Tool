@@ -144,6 +144,34 @@ module.exports = class MitigationController{
         };
     }
 
+    computeBranchResults(tree, mitigations, scale = "FLOAT", w_ac = 1, w_td = 1, w_dd = 1){
+        let weights = this.normalizeWeights(w_ac, w_td, w_dd);
+
+        if(!tree.children || tree.children.length === 0){
+            return [];
+        }
+
+        let branchResults = [];
+        tree.children.forEach(branch => {
+            let branchDelta = this.computeDeltaLikelihood(
+                branch,
+                mitigations,
+                scale,
+                weights.w_ac,
+                weights.w_td,
+                weights.w_dd
+            );
+            branchResults.push({
+                branch_name: branch.name,
+                baseline: branchDelta.baseline,
+                mitigated: branchDelta.mitigated,
+                delta: branchDelta.delta
+            });
+        });
+
+        return branchResults;
+    }
+
     normalizeWeights(w_ac, w_td, w_dd){
         if(w_ac <= 0 || w_td <= 0 || w_dd <= 0){
             throw new Error("All weights must be positive numbers greater than 0");
@@ -181,12 +209,23 @@ module.exports = class MitigationController{
             weights.w_td,
             weights.w_dd
         );
+
+        let branchResults = this.computeBranchResults(
+            tree, 
+            csvResult.mitigations, 
+            csvResult.scale, 
+            weights.w_ac, 
+            weights.w_td, 
+            weights.w_dd
+        );
+
         return {
             scale: csvResult.scale,
             weights: weights,
             nodeResults: nodeResults,
             deltaLikelihood: deltaLikelihood,
-            warnings: allWarnings
+            warnings: allWarnings,
+            branchResults
         };
     }
 

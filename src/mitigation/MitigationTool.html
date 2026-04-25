@@ -513,6 +513,25 @@
                 <ul id="warningsList" style="margin-top:8px; padding-left:20px;"></ul>
             </div>
 
+            <div id="branchSection" style="margin-bottom:24px;">
+                <h3 style="font-size:14px; font-weight:600; color:#001529; margin-bottom:12px;">Branch Level Results</h3>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Branch Name</th>
+                            <th>Baseline Likelihood</th>
+                            <th>Mitigated Likelihood</th>
+                            <th>Delta</th>
+                            <th>% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody id="branchBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:14px; font-weight:600; color:#001529; margin-bottom:12px;">Terminal Node Results</h3>
+
             <table class="results-table">
                 <thead>
                     <tr>
@@ -676,13 +695,38 @@
                 let mitigatedProbability = this.computeTreeProbability(mitigatedTree, scale, weights.w_ac, weights.w_td, weights.w_dd);
                 return { baseline: baselineProbability, mitigated: mitigatedProbability, delta: mitigatedProbability - baselineProbability };
             }
+            computeBranchResults(tree, mitigations, scale = "FLOAT", w_ac = 1, w_td = 1, w_dd = 1){
+                let weights = this.normalizeWeights(w_ac, w_td, w_dd);
+                if(!tree.children || tree.children.length === 0){
+                    return [];
+                }
+                let branchResults = [];
+                tree.children.forEach(branch => {
+                    let branchDelta = this.computeDeltaLikelihood(
+                        branch,
+                        mitigations,
+                        scale,
+                        weights.w_ac,
+                        weights.w_td,
+                        weights.w_dd
+                    );
+                    branchResults.push({
+                        branch_name: branch.name,
+                        baseline: branchDelta.baseline,
+                        mitigated: branchDelta.mitigated,
+                        delta: branchDelta.delta
+                    });
+                });
+                return branchResults;
+            }
             runMitigationAnalysis(tree, csvText){
                 let csvResult = this.parseMitigationCSV(csvText);
                 let weights = this.normalizeWeights(csvResult.weights.w_ac, csvResult.weights.w_td, csvResult.weights.w_dd);
                 let allWarnings = [];
                 let nodeResults = this.analyzeMitigations(tree, csvResult.mitigations, csvResult.scale, weights.w_ac, weights.w_td, weights.w_dd, allWarnings);
                 let deltaLikelihood = this.computeDeltaLikelihood(tree, csvResult.mitigations, csvResult.scale, weights.w_ac, weights.w_td, weights.w_dd);
-                return { scale: csvResult.scale, weights, nodeResults, deltaLikelihood, warnings: allWarnings };
+                let branchResults = this.computeBranchResults(tree, csvResult.mitigations, csvResult.scale, weights.w_ac, weights.w_td, weights.w_dd);
+                return { scale: csvResult.scale, weights, nodeResults, deltaLikelihood, warnings: allWarnings, branchResults };
             }
         }
         const mc = new MitigationController();
@@ -775,6 +819,23 @@
                 warningsBox.style.display = "none";
             }
 
+            // fill branch results table
+            const branchTbody = document.getElementById("branchBody");
+            branchTbody.innerHTML = "";
+            if(result.branchResults && result.branchResults.length > 0){
+                result.branchResults.forEach(branch => {
+                    const pctChange = ((branch.delta / branch.baseline) * 100).toFixed(2);
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${branch.branch_name}</td>
+                        <td>${branch.baseline.toFixed(8)}</td>
+                        <td>${branch.mitigated.toFixed(8)}</td>
+                        <td class="${branch.delta < 0 ? 'delta-negative' : 'delta-positive'}">${branch.delta.toFixed(8)}</td>
+                        <td class="${branch.delta < 0 ? 'delta-negative' : 'delta-positive'}">${pctChange}%</td>
+                    `;
+                    branchTbody.appendChild(row);
+                });
+            }
             // fill results table
             const tbody = document.getElementById("resultsBody");
             tbody.innerHTML = "";
@@ -808,6 +869,7 @@
             document.getElementById("runBtn").disabled = true;
             document.getElementById("resultsSection").style.display = "none";
             document.getElementById("warningsBox").style.display = "none";
+            document.getElementById("branchBody").innerHTML = "";
             hideError();
         }
 
