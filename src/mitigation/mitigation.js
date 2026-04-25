@@ -30,7 +30,9 @@ module.exports = class MitigationController{
         return{
             baseline: baseline,
             mitigated: mitigated,
-            delta: mitigated - baseline
+            delta: mitigated - baseline,
+            original: { AC, TD, DD },
+            updated: { AC: mitigation.AC_new, TD: mitigation.TD_new, DD: mitigation.DD_new }
         };
     }
 

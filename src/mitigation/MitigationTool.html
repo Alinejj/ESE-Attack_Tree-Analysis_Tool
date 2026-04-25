@@ -536,6 +536,12 @@
                 <thead>
                     <tr>
                         <th>Node Name</th>
+                        <th>Original AC</th>
+                        <th>Original TD</th>
+                        <th>Original DD</th>
+                        <th>New AC</th>
+                        <th>New TD</th>
+                        <th>New DD</th>
                         <th>Baseline p(H|A)</th>
                         <th>Mitigated p(H|A)</th>
                         <th>Delta</th>
@@ -606,7 +612,13 @@
                 if(warnings.length > 0) warnings.forEach(w => console.warn(w));
                 let baseline = this.computePHA(AC, TD, DD, weights.w_ac, weights.w_td, weights.w_dd, scale);
                 let mitigated = this.computePHA(mitigation.AC_new, mitigation.TD_new, mitigation.DD_new, weights.w_ac, weights.w_td, weights.w_dd, scale);
-                return { baseline, mitigated, delta: mitigated - baseline };
+                return { 
+                    baseline, 
+                    mitigated, 
+                    delta: mitigated - baseline,
+                    original: { AC, TD, DD },
+                    updated: { AC: mitigation.AC_new, TD: mitigation.TD_new, DD: mitigation.DD_new }
+                };
             }
 
             parseMitigationCSV(csvText){
@@ -845,6 +857,12 @@
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${node.node_name}</td>
+                    <td>${node.original.AC}</td>
+                    <td>${node.original.TD}</td>
+                    <td>${node.original.DD}</td>
+                    <td>${node.updated.AC}</td>
+                    <td>${node.updated.TD}</td>
+                    <td>${node.updated.DD}</td>
                     <td>${node.baseline.toFixed(6)}</td>
                     <td>${node.mitigated.toFixed(6)}</td>
                     <td class="${node.delta < 0 ? 'delta-negative' : 'delta-positive'}">${node.delta.toFixed(6)}</td>
